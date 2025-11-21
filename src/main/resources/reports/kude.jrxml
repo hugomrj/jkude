@@ -6,7 +6,7 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite.jrdax"/>
 	<parameter name="report_path" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/hugo/JaspersoftWorkspace/Kude"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/home/hugo/JaspersoftWorkspace/kudeJasper"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="cdc" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["01800140664026001007898212024011912284838453"]]></defaultValueExpression>
@@ -58,7 +58,8 @@
 FROM factura_cabecera c
 INNER JOIN factura_detalle d
     ON d.factura_id = c.id
-WHERE c.id  like   $P{cdc}]]>
+WHERE c.id LIKE '%$P{cdc}%'
+]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -704,10 +705,8 @@ WHERE c.id  like   $P{cdc}]]>
 				<text><![CDATA[KuDE de Factura Electronica]]></text>
 			</staticText>
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="27" width="113" height="61" uuid="18d72a20-2fa9-469f-b7cb-facd2542ee83">
-					<printWhenExpression><![CDATA[new Boolean(false)]]></printWhenExpression>
-				</reportElement>
-				<imageExpression><![CDATA["/imagen/logo.png"]]></imageExpression>
+				<reportElement x="10" y="27" width="90" height="61" uuid="18d72a20-2fa9-469f-b7cb-facd2542ee83"/>
+				<imageExpression><![CDATA[$P{report_path}+ "/imagen/logo.jpeg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="283" y="114" width="270" height="14" uuid="18e401c6-efe3-4d17-8aca-9ed3eb3d77eb"/>
