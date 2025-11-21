@@ -2,13 +2,19 @@ package py.com.jkude.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import net.sf.jasperreports.engine.*;
+import javax.sql.DataSource;
+import jakarta.inject.Inject;
 
 import java.io.InputStream;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 @ApplicationScoped
 public class ServicioJasper {
+
+    @Inject
+    DataSource dataSource;
 
     public byte[] generarKude(String cdc) {
 
@@ -32,12 +38,15 @@ public class ServicioJasper {
                 throw new RuntimeException("No se encontró kude.jrxml");
             }
 
+            // Obtener conexión real de Quarkus + SQLite
+            Connection conn = dataSource.getConnection();
+
             JasperReport reporte = JasperCompileManager.compileReport(jrxml);
 
             JasperPrint print = JasperFillManager.fillReport(
                     reporte,
                     params,
-                    new JREmptyDataSource()
+                    conn
             );
 
             return JasperExportManager.exportReportToPdf(print);

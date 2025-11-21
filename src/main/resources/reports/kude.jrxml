@@ -58,7 +58,9 @@
 FROM factura_cabecera c
 INNER JOIN factura_detalle d
     ON d.factura_id = c.id
-WHERE c.id LIKE '%$P{cdc}%'
+WHERE c.id = $P{cdc}
+
+
 ]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
