@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl">
+  <name>sqjlitekude</name>
+  <classpath>/home/hugo/JaspersoftWorkspace/sqlite-jdbc-3.34.0.jar</classpath>
+  <driver>org.sqlite.JDBC</driver>
+  <username>sa</username>
+  <password>sa</password>
+  <url>jdbc:sqlite:/home/hugo/dev/quarkus/jkude/data/jkude.db</url>
+  <database></database>
+  <savePassword>true</savePassword>
+  <serverAddress></serverAddress>
+</jdbcDataAdapter>

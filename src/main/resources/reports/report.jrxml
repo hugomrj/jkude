@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN"
+        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="sample" pageWidth="595" pageHeight="842" columnWidth="555">
+
+    <!-- parámetros siempre van aquí -->
+    <parameter name="mensaje" class="java.lang.String"/>
+
+    <detail>
+        <band height="40">
+            <textField>
+                <reportElement x="0" y="0" width="300" height="40"/>
+                <textFieldExpression><![CDATA[$P{mensaje}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>
