@@ -6,7 +6,7 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite.jrdax"/>
 	<parameter name="report_path" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/hugo/JaspersoftWorkspace/kudeJasper"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/home/hugo/JaspersoftWorkspace/KudeJasper"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="cdc" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["01800140664026001007898212024011912284838453"]]></defaultValueExpression>
@@ -19,7 +19,8 @@
 		<![CDATA[SELECT
     c.id,
     c.ruc_emisor as emisor_ruc,
-    c.dv_emisor,   c.nombre_emisor,
+    c.dv_emisor,   
+    c.nombre_emisor,
     c.fantasia_emisor,
     c.direccion_emisor,
     c.departamento_emisor,
@@ -43,7 +44,22 @@
     c.total_gravada10,
     c.total_exenta,
     c.total_gravada5,
+    c.sub_exenta5,        
+    c.sub_exenta10,       
+    c.total_operacion,    
+    c.total_descuento,    
+    c.total_desc_glotem,  
+    c.total_anticipo_item,
+    c.total_anticipo,     
+    c.porc_desc_total,    
+    c.desc_total,         
+    c.anticipo,           
+    c.redondeo,           
+    c.iva5,               
+    c.iva10,              
+    c.total_base_iva,     
     
+    -- Campos de factura_detalle (actualizados)
     d.factura_id,
     d.producto_codigo,
     d.producto_descripcion,
@@ -54,203 +70,338 @@
     d.gravada5,
     d.gravada10,
     d.subtotal,
-    d.iva
+    d.iva,
+
+    d.descuento_item,
+    d.porcentaje_descuento,
+    d.descuento_global_item,
+    d.total_bruto_item,
+    d.base_gravada_iva,
+    d.liquidacion_iva_item,
+    d.base_exenta,
+    d.tasa_iva,
+    d.afectacion_iva,
+    d.desc_afectacion_iva,
+    d.proporcion_iva
+
 FROM factura_cabecera c
 INNER JOIN factura_detalle d
     ON d.factura_id = c.id
-WHERE c.id = $P{cdc}
-
-
-]]>
+WHERE c.id = $P{cdc}]]>
 	</queryString>
-	<field name="id" class="java.lang.Object">
+	<field name="id" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="emisor_ruc" class="java.lang.Object">
+	<field name="emisor_ruc" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="emisor_ruc"/>
 		<property name="com.jaspersoft.studio.field.label" value="emisor_ruc"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="dv_emisor" class="java.lang.Object">
+	<field name="dv_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="dv_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="dv_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="nombre_emisor" class="java.lang.Object">
+	<field name="nombre_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nombre_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="nombre_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="fantasia_emisor" class="java.lang.Object">
+	<field name="fantasia_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="fantasia_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="fantasia_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="direccion_emisor" class="java.lang.Object">
+	<field name="direccion_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="direccion_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="direccion_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="departamento_emisor" class="java.lang.Object">
+	<field name="departamento_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="departamento_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="departamento_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="ciudad_emisor" class="java.lang.Object">
+	<field name="ciudad_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="ciudad_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="ciudad_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="telefono_emisor" class="java.lang.Object">
+	<field name="telefono_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="telefono_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="telefono_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="email_emisor" class="java.lang.Object">
+	<field name="email_emisor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="email_emisor"/>
 		<property name="com.jaspersoft.studio.field.label" value="email_emisor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="numero_timbrado" class="java.lang.Object">
+	<field name="numero_timbrado" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="numero_timbrado"/>
 		<property name="com.jaspersoft.studio.field.label" value="numero_timbrado"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="establecimiento" class="java.lang.Object">
+	<field name="establecimiento" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="establecimiento"/>
 		<property name="com.jaspersoft.studio.field.label" value="establecimiento"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="punto_expedicion" class="java.lang.Object">
+	<field name="punto_expedicion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="punto_expedicion"/>
 		<property name="com.jaspersoft.studio.field.label" value="punto_expedicion"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="numero_documento" class="java.lang.Object">
+	<field name="numero_documento" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="numero_documento"/>
 		<property name="com.jaspersoft.studio.field.label" value="numero_documento"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="fecha_inicio_vigencia" class="java.lang.Object">
+	<field name="fecha_inicio_vigencia" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="fecha_inicio_vigencia"/>
 		<property name="com.jaspersoft.studio.field.label" value="fecha_inicio_vigencia"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="fecha_emision" class="java.lang.Object">
+	<field name="fecha_emision" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="fecha_emision"/>
 		<property name="com.jaspersoft.studio.field.label" value="fecha_emision"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="condicion_operacion" class="java.lang.Object">
+	<field name="condicion_operacion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="condicion_operacion"/>
 		<property name="com.jaspersoft.studio.field.label" value="condicion_operacion"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="moneda" class="java.lang.Object">
+	<field name="moneda" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="moneda"/>
 		<property name="com.jaspersoft.studio.field.label" value="moneda"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="ruc_receptor" class="java.lang.Object">
+	<field name="ruc_receptor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="ruc_receptor"/>
 		<property name="com.jaspersoft.studio.field.label" value="ruc_receptor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="dv_receptor" class="java.lang.Object">
+	<field name="dv_receptor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="dv_receptor"/>
 		<property name="com.jaspersoft.studio.field.label" value="dv_receptor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="nombre_receptor" class="java.lang.Object">
+	<field name="nombre_receptor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nombre_receptor"/>
 		<property name="com.jaspersoft.studio.field.label" value="nombre_receptor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="email_receptor" class="java.lang.Object">
+	<field name="email_receptor" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="email_receptor"/>
 		<property name="com.jaspersoft.studio.field.label" value="email_receptor"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="total_iva" class="java.lang.Object">
+	<field name="total_iva" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="total_iva"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_iva"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="total_monto" class="java.lang.Object">
+	<field name="total_monto" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="total_monto"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_monto"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="total_gravada10" class="java.lang.Object">
+	<field name="total_gravada10" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="total_gravada10"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_gravada10"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="total_exenta" class="java.lang.Object">
+	<field name="total_exenta" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="total_exenta"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_exenta"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="total_gravada5" class="java.lang.Object">
+	<field name="total_gravada5" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="total_gravada5"/>
 		<property name="com.jaspersoft.studio.field.label" value="total_gravada5"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
 	</field>
-	<field name="factura_id" class="java.lang.Object">
+	<field name="sub_exenta5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sub_exenta5"/>
+		<property name="com.jaspersoft.studio.field.label" value="sub_exenta5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="sub_exenta10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sub_exenta10"/>
+		<property name="com.jaspersoft.studio.field.label" value="sub_exenta10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_operacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_operacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_operacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_descuento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_descuento"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_descuento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_desc_glotem" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_desc_glotem"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_desc_glotem"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_anticipo_item" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_anticipo_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_anticipo_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_anticipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_anticipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_anticipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="porc_desc_total" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="porc_desc_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="porc_desc_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="desc_total" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="desc_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="anticipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="anticipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="anticipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="redondeo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="redondeo"/>
+		<property name="com.jaspersoft.studio.field.label" value="redondeo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="iva5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iva5"/>
+		<property name="com.jaspersoft.studio.field.label" value="iva5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="iva10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iva10"/>
+		<property name="com.jaspersoft.studio.field.label" value="iva10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_base_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_base_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_base_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="factura_id" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="factura_id"/>
 		<property name="com.jaspersoft.studio.field.label" value="factura_id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="producto_codigo" class="java.lang.Object">
+	<field name="producto_codigo" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="producto_codigo"/>
 		<property name="com.jaspersoft.studio.field.label" value="producto_codigo"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="producto_descripcion" class="java.lang.Object">
+	<field name="producto_descripcion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="producto_descripcion"/>
 		<property name="com.jaspersoft.studio.field.label" value="producto_descripcion"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="unidad_medida" class="java.lang.Object">
+	<field name="unidad_medida" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="unidad_medida"/>
 		<property name="com.jaspersoft.studio.field.label" value="unidad_medida"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="cantidad" class="java.lang.Object">
+	<field name="cantidad" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
 		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="precio_unitario" class="java.lang.Object">
+	<field name="precio_unitario" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="precio_unitario"/>
 		<property name="com.jaspersoft.studio.field.label" value="precio_unitario"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="exenta" class="java.lang.Object">
+	<field name="exenta" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="exenta"/>
 		<property name="com.jaspersoft.studio.field.label" value="exenta"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="gravada5" class="java.lang.Object">
+	<field name="gravada5" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="gravada5"/>
 		<property name="com.jaspersoft.studio.field.label" value="gravada5"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="gravada10" class="java.lang.Object">
+	<field name="gravada10" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="gravada10"/>
 		<property name="com.jaspersoft.studio.field.label" value="gravada10"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="subtotal" class="java.lang.Object">
+	<field name="subtotal" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="subtotal"/>
 		<property name="com.jaspersoft.studio.field.label" value="subtotal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
-	<field name="iva" class="java.lang.Object">
+	<field name="iva" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="iva"/>
 		<property name="com.jaspersoft.studio.field.label" value="iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="descuento_item" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descuento_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="descuento_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="porcentaje_descuento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="porcentaje_descuento"/>
+		<property name="com.jaspersoft.studio.field.label" value="porcentaje_descuento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="descuento_global_item" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descuento_global_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="descuento_global_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="total_bruto_item" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_bruto_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_bruto_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="base_gravada_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="base_gravada_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="base_gravada_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="liquidacion_iva_item" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="liquidacion_iva_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="liquidacion_iva_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="base_exenta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="base_exenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="base_exenta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="tasa_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tasa_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="tasa_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="afectacion_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="desc_afectacion_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="desc_afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="proporcion_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="proporcion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="proporcion_iva"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
 	</field>
 	<group name="emisor">
@@ -378,7 +529,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{total_exenta} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_exenta}))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" pattern="#,##0.###;#,##0.###-">
 					<reportElement x="433" y="0" width="60" height="20" uuid="2382bfff-2268-4942-8079-2e5cacc3df84"/>
@@ -393,7 +546,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{total_gravada5} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_gravada5}))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" pattern="#,##0.###;#,##0.###-">
 					<reportElement x="493" y="0" width="61" height="20" uuid="b9c5bcf5-d400-4380-b334-cc5fcbcb5948"/>
@@ -408,7 +563,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dv_emisor}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{sub_exenta10} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal(  $F{sub_exenta10}    ))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="0" y="20" width="433" height="20" uuid="98e694ec-07d2-4067-b26a-ec5af3becd0f">
@@ -457,7 +614,11 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="10"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{total_monto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{total_monto} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(
+        new java.math.BigDecimal($F{total_monto}).setScale(0, java.math.RoundingMode.HALF_UP)
+      )]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="313" y="40" width="60" height="20" uuid="fd9832d9-cb61-48d4-b67d-c33b64cbc70d">
@@ -505,7 +666,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{total_iva}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{total_base_iva} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_base_iva}))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" pattern="#,##0.###;#,##0.###-">
 					<reportElement x="373" y="40" width="60" height="20" uuid="41e48ea2-c396-4333-9920-fb442ccc4ba2"/>
@@ -520,7 +683,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="8" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dv_emisor}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{iva10} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{iva10}))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement x="193" y="40" width="60" height="20" uuid="3d3297ba-87cb-4ee2-9ed7-6cf9ab40c3e1">
@@ -555,7 +720,9 @@ WHERE c.id = $P{cdc}
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="8" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dv_emisor}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{iva5} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{iva5}))]]></textFieldExpression>
 				</textField>
 				<rectangle>
 					<reportElement mode="Transparent" x="0" y="60" width="554" height="120" uuid="4b2c39e9-83ab-46c4-900f-877559f178ec"/>
@@ -662,7 +829,7 @@ WHERE c.id = $P{cdc}
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{emisor_ruc}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="283" y="34" width="100" height="14" uuid="2a3d4882-dd73-4230-8285-46bb564b4961"/>
@@ -690,7 +857,10 @@ WHERE c.id = $P{cdc}
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_inicio_vigencia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fecha_inicio_vigencia} == null 
+    ? "" 
+    : java.time.LocalDate.parse($F{fecha_inicio_vigencia})
+        .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="283" y="74" width="120" height="14" uuid="dbd29ea6-ce13-4e63-9985-cd2825cdda70"/>
@@ -722,7 +892,7 @@ WHERE c.id = $P{cdc}
 				<textElement>
 					<font fontName="DejaVu Sans" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{establecimiento} +" - "+ $F{punto_expedicion}  +" - "+  $F{numero_documento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="100" width="243" height="14" uuid="c5753a4e-f22a-46b5-8e23-aec60d1094e0"/>
@@ -757,7 +927,10 @@ WHERE c.id = $P{cdc}
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fecha_emision} == null
+    ? ""
+    : java.time.LocalDateTime.parse($F{fecha_emision})
+        .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="190" width="100" height="14" uuid="c51f7f81-6b58-4efd-a050-428fcc6dd00e"/>
@@ -834,28 +1007,28 @@ WHERE c.id = $P{cdc}
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ruc_receptor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombre_receptor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="383" y="220" width="161" height="14" uuid="115190ce-b5b4-44cb-ade4-d20ad9ca279d"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ruc_receptor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="383" y="235" width="161" height="14" uuid="59ec28e8-5f00-4a8e-b4fb-29baae726786"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ruc_receptor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="383" y="250" width="161" height="14" uuid="78f27aba-3833-48c2-bda2-2993ad9fb86a"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ruc_receptor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{email_receptor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="235" width="110" height="14" uuid="aa1af9a9-6dd7-4621-a8c8-126c45128e71"/>
@@ -997,7 +1170,7 @@ unitario]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{unidad_medida}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="253" y="-8" width="60" height="31" uuid="079d664b-4ba4-4e2c-95f8-da095a3cb392"/>
@@ -1018,7 +1191,9 @@ unitario]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{precio_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{precio_unitario} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal(  $F{precio_unitario}    ))]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="#,##0.###">
 				<reportElement x="373" y="-8" width="60" height="31" uuid="447db9f1-9ade-401c-b392-6ce1362e2d62">
@@ -1035,7 +1210,11 @@ unitario]]></text>
 					<font fontName="DejaVu Sans" size="8"/>
 					<paragraph rightIndent="4"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{exenta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{exenta} == null
+    ? "0"
+    : new java.text.DecimalFormat("#").format(
+          Double.parseDouble($F{exenta}.toString())
+      )]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="#,##0.###">
 				<reportElement x="433" y="-8" width="60" height="31" uuid="204a896a-10a3-499c-97f8-455f93c72ff8">
@@ -1045,7 +1224,11 @@ unitario]]></text>
 					<font fontName="DejaVu Sans" size="8"/>
 					<paragraph rightIndent="4"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{gravada5}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gravada5} == null
+    ? "0"
+    : new java.text.DecimalFormat("#").format(
+          Double.parseDouble($F{gravada5}.toString())
+      )]]></textFieldExpression>
 			</textField>
 			<frame>
 				<reportElement x="493" y="-8" width="61" height="31" uuid="74a7483b-04db-467d-9242-eeb8d6867266"/>
@@ -1062,7 +1245,11 @@ unitario]]></text>
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{gravada10}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{gravada10} == null
+    ? "0"
+    : new java.text.DecimalFormat("#").format(
+          Double.parseDouble($F{gravada10}.toString())
+      )]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

@@ -5,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KUDE PDF</title>
 
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         async function enviarXML(event) {
             event.preventDefault();
 
-            const xml = document.getElementById("xml").value.trim();
-            if (!xml) {
-                alert("El XML está vacío.");
+            const textXML = document.getElementById("xml").value.trim();
+            const fileInput = document.getElementById("xmlFile");
+            const file = fileInput.files[0];
+
+            let xmlContent = "";
+
+            if (file) {
+                xmlContent = await file.text();
+            } else if (textXML) {
+                xmlContent = textXML;
+            } else {
+                alert("Debes pegar un XML o seleccionar un archivo.");
                 return;
             }
 
             const response = await fetch("/kude/pdf", {
                 method: "POST",
                 headers: { "Content-Type": "application/xml" },
-                body: xml
+                body: xmlContent
             });
 
             const blob = await response.blob();
@@ -41,12 +49,22 @@
 
     <form onsubmit="enviarXML(event)" class="space-y-5">
 
+        <label class="block text-gray-700 font-medium">Pegar XML:</label>
         <textarea
                 id="xml"
-                rows="18"
-                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none font-mono text-base"
-                placeholder="Pegá aquí el XML..."
-        ></textarea>
+                rows="8"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none font-mono"
+                placeholder="Pegá aquí el XML (opcional)..."></textarea>
+
+        <div class="text-center text-gray-600 font-medium">— ó —</div>
+
+        <label class="block text-gray-700 font-medium">Subir archivo XML:</label>
+        <input
+                id="xmlFile"
+                type="file"
+                accept=".xml"
+                class="w-full border border-gray-300 p-3 rounded-xl bg-gray-50 cursor-pointer"
+        />
 
         <button
                 type="submit"

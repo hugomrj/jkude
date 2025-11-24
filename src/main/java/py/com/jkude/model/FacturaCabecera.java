@@ -42,4 +42,21 @@ public class FacturaCabecera extends PanacheEntityBase {
     public Double total_gravada10;
     public Double total_exenta;
     public Double total_gravada5;
+
+    public Double sub_exenta5;      // dSub5
+    public Double sub_exenta10;     // dSub10
+    public Double total_operacion;  // dTotOpe
+    public Double total_descuento;  // dTotDesc
+    public Double total_desc_glotem; // dTotDescGlotem
+    public Double total_anticipo_item; // dTotAntItem
+    public Double total_anticipo;   // dTotAnt
+    public Double porc_desc_total;  // dPorcDescTotal
+    public Double desc_total;       // dDescTotal
+    public Double anticipo;         // dAnticipo
+    public Double redondeo;         // dRedon
+    public Double iva5;             // dIVA5
+    public Double iva10;            // dIVA10
+    public Double total_base_iva;   // dTBasGraIVA
+
+
 }
