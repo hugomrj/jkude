@@ -666,9 +666,9 @@ WHERE c.id = $P{cdc}]]>
 						<font fontName="DejaVu Sans" size="8"/>
 						<paragraph leftIndent="0" rightIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{total_base_iva} == null 
+					<textFieldExpression><![CDATA[$F{total_iva} == null 
     ? "" 
-    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_base_iva}))]]></textFieldExpression>
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_iva}))]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" pattern="#,##0.###;#,##0.###-">
 					<reportElement x="373" y="40" width="60" height="20" uuid="41e48ea2-c396-4333-9920-fb442ccc4ba2"/>
