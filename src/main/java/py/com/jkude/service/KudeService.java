@@ -72,24 +72,10 @@ public class KudeService {
     }
 
 
-
     private void guardarXmlEnArchivo(String xml, JSONObject json) {
         try {
-            // Extraer el ID del JSON
-            String id = json.optString("Id");
-            if (id == null || id.isEmpty()) {
-                // Buscar en la estructura anidada
-                JSONObject rLoteDE = json.optJSONObject("rLoteDE");
-                if (rLoteDE != null) {
-                    JSONObject rDE = rLoteDE.optJSONObject("rDE");
-                    if (rDE != null) {
-                        JSONObject DE = rDE.optJSONObject("DE");
-                        if (DE != null) {
-                            id = DE.optString("Id");
-                        }
-                    }
-                }
-            }
+            // Extraer el ID del JSON - maneja ambas estructuras
+            String id = extraerIdDelJson(json);
 
             if (id == null || id.isEmpty()) {
                 System.err.println("No se pudo encontrar el ID en el JSON");
@@ -116,5 +102,39 @@ public class KudeService {
             e.printStackTrace();
         }
     }
+
+    private String extraerIdDelJson(JSONObject json) {
+        String id = null;
+
+        // Primero buscar en estructura con lote: rLoteDE > rDE > DE
+        if (json.has("rLoteDE")) {
+            JSONObject rLoteDE = json.optJSONObject("rLoteDE");
+            if (rLoteDE != null) {
+                JSONObject rDE = rLoteDE.optJSONObject("rDE");
+                if (rDE != null) {
+                    JSONObject DE = rDE.optJSONObject("DE");
+                    if (DE != null) {
+                        id = DE.optString("Id");
+                    }
+                }
+            }
+        }
+        // Si no encontró, buscar en estructura directa: rDE > DE
+        else if (json.has("rDE")) {
+            JSONObject rDE = json.optJSONObject("rDE");
+            if (rDE != null) {
+                JSONObject DE = rDE.optJSONObject("DE");
+                if (DE != null) {
+                    id = DE.optString("Id");
+                }
+            }
+        }
+
+        return id;
+    }
+
+
+
+
 
 }
