@@ -15,16 +15,25 @@ public class KudeMapper {
     public FacturaCabecera mapCabecera(JSONObject json) {
 
         FacturaCabecera cab = new FacturaCabecera();
-        cab.id = json.query("/rLoteDE/rDE/DE/Id").toString();
 
-        JSONObject rDE = json
-                .getJSONObject("rLoteDE")
-                .getJSONObject("rDE")
-                .getJSONObject("DE");
+        // Determinar la estructura del JSON
+        JSONObject rDE;
+        if (json.has("rLoteDE")) {
+            // Estructura con lote: rLoteDE > rDE > DE
+            rDE = json
+                    .getJSONObject("rLoteDE")
+                    .getJSONObject("rDE")
+                    .getJSONObject("DE");
+        } else {
+            // Estructura directa: rDE > DE
+            rDE = json
+                    .getJSONObject("rDE")
+                    .getJSONObject("DE");
+        }
 
         FacturaCabecera c = new FacturaCabecera();
 
-        // ID único de la factura
+        // ID único de la factura (CDC)
         c.id = rDE.optString("Id");
 
         // Fecha emisión
@@ -112,10 +121,17 @@ public class KudeMapper {
 
     public List<FacturaDetalle> mapDetalles(JSONObject json) {
 
-        JSONObject rDE = json
-                .getJSONObject("rLoteDE")
-                .getJSONObject("rDE")
-                .getJSONObject("DE");
+        JSONObject rDE;
+        if (json.has("rLoteDE")) {
+            rDE = json
+                    .getJSONObject("rLoteDE")
+                    .getJSONObject("rDE")
+                    .getJSONObject("DE");
+        } else {
+            rDE = json
+                    .getJSONObject("rDE")
+                    .getJSONObject("DE");
+        }
 
         List<FacturaDetalle> lista = new ArrayList<>();
 
