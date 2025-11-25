@@ -37,7 +37,7 @@ public class ReporteService {
             */
 
             // GENERAR QR DINÁMICO
-            String qrData = "https://ekuatia.set.gov.py/consultas/qr?Id=" + cdc;
+            String qrData = "https://ekuatia.set.gov.py/consultas/150/" + cdc;
 
             // Carpeta donde guardar el PNG
             String qrFolder = basePath + "/qr";
