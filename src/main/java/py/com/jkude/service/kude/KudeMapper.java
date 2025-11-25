@@ -1,4 +1,4 @@
-package py.com.jkude.service;
+package py.com.jkude.service.kude;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.json.JSONObject;

@@ -30,7 +30,7 @@ dependencies {
 
 
     // SQLite
-//    implementation("org.xerial:sqlite-jdbc:3.46.0.0")
+    //    implementation("org.xerial:sqlite-jdbc:3.46.0.0")
     implementation("org.xerial:sqlite-jdbc:3.34.0")
     implementation "org.hibernate.orm:hibernate-community-dialects:7.1.6.Final"
 
@@ -48,6 +48,10 @@ dependencies {
 
     implementation("io.quarkus:quarkus-rest")
     implementation("io.quarkus:quarkus-rest-jsonb")
+
+    // ZXing
+    implementation 'com.google.zxing:core:3.5.0'
+    implementation 'com.google.zxing:javase:3.5.0'
 
 
 }

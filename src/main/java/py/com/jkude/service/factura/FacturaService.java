@@ -1,4 +1,4 @@
-package py.com.jkude.service;
+package py.com.jkude.service.factura;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

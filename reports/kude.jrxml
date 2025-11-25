@@ -795,7 +795,6 @@ WHERE c.id = $P{cdc}]]>
 					<reportElement x="26" y="62" width="116" height="116" uuid="35c78dc6-0e7e-4b24-a2ee-593d8b841289">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<printWhenExpression><![CDATA[new Boolean(false)]]></printWhenExpression>
 					</reportElement>
 					<imageExpression><![CDATA[$P{qrFilePath}]]></imageExpression>
 				</image>

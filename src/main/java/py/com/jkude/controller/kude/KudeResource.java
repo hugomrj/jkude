@@ -6,7 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import py.com.jkude.service.KudeService;
+import py.com.jkude.service.kude.KudeService;
 
 @Path("/kude")
 @Transactional

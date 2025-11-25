@@ -5,7 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import py.com.jkude.model.FacturaCabecera;
-import py.com.jkude.service.FacturaService;
+import py.com.jkude.service.factura.FacturaService;
 import py.com.jkude.util.PagedUtil;
 
 import java.util.List;

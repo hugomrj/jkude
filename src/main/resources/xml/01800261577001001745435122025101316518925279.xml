@@ -1,0 +1,146 @@
+<rDE xmlns="http://ekuatia.set.gov.py/sifen/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ekuatia.set.gov.py/sifen/xsd siRecepDE_v150.xsd">
+  <dVerFor>150</dVerFor>
+  <DE Id="01800261577001001745435122025101316518925279">
+    <dDVId>9</dDVId>
+    <dFecFirma>2025-10-14T05:15:01</dFecFirma>
+    <dSisFact>1</dSisFact>
+    <gOpeDE>
+      <iTipEmi>1</iTipEmi>
+      <dDesTipEmi>Normal</dDesTipEmi>
+      <dCodSeg>651892527</dCodSeg>
+    </gOpeDE>
+    <gTimb>
+      <iTiDE>1</iTiDE>
+      <dDesTiDE>Factura electrónica</dDesTiDE>
+      <dNumTim>16045146</dNumTim>
+      <dEst>001</dEst>
+      <dPunExp>001</dPunExp>
+      <dNumDoc>7454351</dNumDoc>
+      <dFeIniT>2022-11-28</dFeIniT>
+    </gTimb>
+    <gDatGralOpe>
+      <dFeEmiDE>2025-10-13T22:11:20</dFeEmiDE>
+      <gOpeCom>
+        <iTipTra>2</iTipTra>
+        <dDesTipTra>Prestación de servicios</dDesTipTra>
+        <iTImp>5</iTImp>
+        <dDesTImp>IVA - Renta</dDesTImp>
+        <cMoneOpe>PYG</cMoneOpe>
+        <dDesMoneOpe>Guarani</dDesMoneOpe>
+      </gOpeCom>
+      <gEmis>
+        <dRucEm>80026157</dRucEm>
+        <dDVEmi>7</dDVEmi>
+        <iTipCont>2</iTipCont>
+        <cTipReg>8</cTipReg>
+        <dNomEmi>UENO BANK SOCIEDAD ANÓNIMA</dNomEmi>
+        <dDirEmi>AVDA SANTA TERESA N°3088 CASI CONCEJAL VARGAS</dDirEmi>
+        <dNumCas>3088</dNumCas>
+        <cDepEmi>1</cDepEmi>
+        <dDesDepEmi>CAPITAL</dDesDepEmi>
+        <cCiuEmi>1</cCiuEmi>
+        <dDesCiuEmi>ASUNCION (DISTRITO)</dDesCiuEmi>
+        <dTelEmi>0216188000</dTelEmi>
+        <dEmailE>contabilidad@ueno.com.py</dEmailE>
+        <gActEco>
+          <cActEco>64190</cActEco>
+          <dDesActEco>OTROS TIPOS DE INTERMEDIACIÓN MONETARIA</dDesActEco>
+        </gActEco>
+      </gEmis>
+      <gDatRec>
+        <iNatRec>2</iNatRec>
+        <iTiOpe>2</iTiOpe>
+        <cPaisRec>PRY</cPaisRec>
+        <dDesPaisRe>Paraguay</dDesPaisRe>
+        <iTipIDRec>1</iTipIDRec>
+        <dDTipIDRec>Cédula paraguaya</dDTipIDRec>
+        <dNumIDRec>3437941</dNumIDRec>
+        <dNomRec>HUGO MARCIANO ROMERO JARA</dNomRec>
+        <dDirRec>25 DE DICIEMBRE CASI CEDRO</dDirRec>
+        <dNumCasRec>0</dNumCasRec>
+        <cDepRec>1</cDepRec>
+        <dDesDepRec>CAPITAL</dDesDepRec>
+        <cDisRec>1</cDisRec>
+        <dDesDisRec>ASUNCION (DISTRITO)</dDesDisRec>
+        <cCiuRec>1</cCiuRec>
+        <dDesCiuRec>ASUNCION (DISTRITO)</dDesCiuRec>
+        <dCelRec>0994352968</dCelRec>
+        <dEmailRec>hugomrj@gmail.com</dEmailRec>
+        <dCodCliente>542810</dCodCliente>
+      </gDatRec>
+    </gDatGralOpe>
+    <gDtipDE>
+      <gCamFE>
+        <iIndPres>5</iIndPres>
+        <dDesIndPres>Operación bancaria</dDesIndPres>
+      </gCamFE>
+      <gCamCond>
+        <iCondOpe>1</iCondOpe>
+        <dDCondOpe>Contado</dDCondOpe>
+        <gPaConEIni>
+          <iTiPago>16</iTiPago>
+          <dDesTiPag>Pago bancario</dDesTiPag>
+          <dMonTiPag>55000</dMonTiPag>
+          <cMoneTiPag>PYG</cMoneTiPag>
+          <dDMoneTiPag>Guarani</dDMoneTiPag>
+        </gPaConEIni>
+      </gCamCond>
+      <gCamItem>
+        <dCodInt>38</dCodInt>
+        <dDesProSer>GESTION DE RECUPERO POR MORA</dDesProSer>
+        <cUniMed>77</cUniMed>
+        <dDesUniMed>UNI</dDesUniMed>
+        <dCantProSer>1</dCantProSer>
+        <cPaisOrig>PRY</cPaisOrig>
+        <dDesPaisOrig>Paraguay</dDesPaisOrig>
+        <gValorItem>
+          <dPUniProSer>55000</dPUniProSer>
+          <dTotBruOpeItem>55000</dTotBruOpeItem>
+          <gValorRestaItem>
+            <dDescItem>0</dDescItem>
+            <dDescGloItem>0</dDescGloItem>
+            <dTotOpeItem>55000</dTotOpeItem>
+          </gValorRestaItem>
+        </gValorItem>
+        <gCamIVA>
+          <iAfecIVA>1</iAfecIVA>
+          <dDesAfecIVA>Gravado IVA</dDesAfecIVA>
+          <dPropIVA>100</dPropIVA>
+          <dTasaIVA>10</dTasaIVA>
+          <dBasGravIVA>50000</dBasGravIVA>
+          <dLiqIVAItem>5000</dLiqIVAItem>
+          <dBasExe>0</dBasExe>
+        </gCamIVA>
+      </gCamItem>
+      <gCamEsp>
+        <gGrupAdi>
+          <dSalAnt>0</dSalAnt>
+        </gGrupAdi>
+      </gCamEsp>
+    </gDtipDE>
+    <gTotSub>
+      <dSubExe>0</dSubExe>
+      <dSubExo>0</dSubExo>
+      <dSub5>0</dSub5>
+      <dSub10>55000</dSub10>
+      <dTotOpe>55000</dTotOpe>
+      <dTotDesc>0</dTotDesc>
+      <dTotDescGlotem>0</dTotDescGlotem>
+      <dTotAntItem>0</dTotAntItem>
+      <dTotAnt>0</dTotAnt>
+      <dPorcDescTotal>0</dPorcDescTotal>
+      <dDescTotal>0</dDescTotal>
+      <dAnticipo>0</dAnticipo>
+      <dRedon>0</dRedon>
+      <dTotGralOpe>55000</dTotGralOpe>
+      <dIVA10>5000</dIVA10>
+      <dTotIVA>5000</dTotIVA>
+      <dBaseGrav10>50000</dBaseGrav10>
+      <dTBasGraIVA>50000</dTBasGraIVA>
+    </gTotSub>
+  </DE><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><Reference URI="#01800261577001001745435122025101316518925279"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>qDUZVdYYLLwa3Suv7lL52WsmfDfIiPiivl9ZC0Ake/k=</DigestValue></Reference></SignedInfo><SignatureValue>lzX9yFa2F0Py74/Sqcm+q02+Vjrw7YcTpLKC64QOEvOyWeiplvM72boZRsaiEkfM5ZL28kzIjVyeiyNNMWc9IJaw/9dZ5oyYa5SadsgM0M7QRWlnMU2KpWG0reagGkTmlzPSGVJCLK3p2tHmoXQyH/7eFkIzsaazF/pAiVib1N5T/XVIlW2PEK+rH3mTeN8Ok7k2Kj+t91aiuafdpA6bzuPZH4VIWs6Glb+3aXJlicF+9u8WlUgAI29gj+Z2dPjfPTF1G85kbEiu+g3kL4wZNfOeIuoGsSCiRgz8UzQxH98LuxXJ8HoogcWu+7VOuJFJ/xzXXwrTbMW0A+j7t9trqQ==</SignatureValue><KeyInfo><X509Data><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature>
+  <gCamFuFD>
+    <dCarQR>https://ekuatia.set.gov.py/consultas/qr?nVersion=150&amp;Id=01800261577001001745435122025101316518925279&amp;dFeEmiDE=323032352d31302d31335432323a31313a3230&amp;dNumIDRec=3437941&amp;dTotGralOpe=55000&amp;dTotIVA=5000&amp;cItems=1&amp;DigestValue=7144555a566459594c4c776133537576376c4c353257736d6644664969506969766c395a4330416b652f6b3d&amp;IdCSC=0001&amp;cHashQR=837ecd5f82d1f620b2d8f62c5db772ce937e437c4d12c0f23668eebb4498fd1c</dCarQR>
+    <dInfAdic>Si su documento electrónico presenta algún error puede solicitar la modificación dentro de las 72 horas siguientes de la emisión de este comprobante.</dInfAdic>
+  </gCamFuFD>
+</rDE>
