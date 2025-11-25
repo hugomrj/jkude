@@ -25,6 +25,17 @@ public class FacturaResource {
         return Response.ok(result).build();
     }
 
+
+    @GET
+    @Path("/simple")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response simple(
+            @QueryParam("page") @DefaultValue("1") int page,
+            @QueryParam("size") @DefaultValue("20") int size) {
+
+        return Response.ok(service.simple(page, size)).build();
+    }
+
     @GET
     @Path("/recientes")
     public Response getRecientes() {

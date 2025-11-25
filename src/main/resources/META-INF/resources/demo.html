@@ -32,71 +32,48 @@
                 submitBtn.textContent = "Generando PDF...";
                 submitBtn.disabled = true;
 
-                // CON PROXY REVERSO - usa la misma base URL
-                const baseURL = window.location.origin; // https://japo.click
+                // DETECTAR RUTA CORRECTA AUTOMÁTICAMENTE
+                const baseURL = window.location.origin;
+                const currentPath = window.location.pathname;
 
-                // Dependiendo de tu configuración del proxy, usa una de estas:
-                const apiURLs = [
-                    `${baseURL}/jkude/kude/pdf`,  // Si el proxy mapea /jkude/*
-                    `${baseURL}/kude/pdf`,        // Si el proxy mapea /kude/*
-                    `${baseURL}/api/kude/pdf`     // Otra posible ruta
-                ];
+                let apiURL;
 
-                let response;
-                let lastError;
-
-                // Intentar con diferentes rutas
-                for (const url of apiURLs) {
-                    try {
-                        console.log('Intentando con:', url);
-                        response = await fetch(url, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/xml",
-                                "Accept": "application/pdf"
-                            },
-                            body: xmlContent
-                        });
-
-                        if (response.ok) {
-                            console.log('✓ Éxito con:', url);
-                            break;
-                        } else {
-                            lastError = `Error ${response.status} con ${url}`;
-                        }
-                    } catch (e) {
-                        lastError = e.message;
-                        console.log('✗ Falló:', url);
-                    }
+                // Si estamos en el proxy (https://japo.click/jkude/demo.html)
+                if (currentPath.includes('/jkude/')) {
+                    apiURL = `${baseURL}/jkude/kude/pdf`;
+                }
+                // Si estamos en local directo (http://localhost:8001/demo.html)
+                else {
+                    apiURL = `${baseURL}/kude/pdf`;
                 }
 
-                if (!response || !response.ok) {
-                    throw new Error(lastError || 'No se pudo conectar con el servidor');
+                console.log('Enviando a:', apiURL);
+
+                const response = await fetch(apiURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/xml",
+                        "Accept": "application/pdf"
+                    },
+                    body: xmlContent
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}`);
                 }
 
                 const blob = await response.blob();
-
-                // Verificar que sea un PDF
-                if (blob.type !== 'application/pdf') {
-                    // Algunos servidores pueden devolver octet-stream
-                    if (blob.type !== 'application/octet-stream') {
-                        throw new Error('El servidor no devolvió un PDF válido. Tipo: ' + blob.type);
-                    }
-                }
-
-                const url = URL.createObjectURL(blob);
 
                 // Descargar automáticamente
                 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
                 const filename = `kude-${timestamp}.pdf`;
 
                 const a = document.createElement('a');
-                a.href = url;
+                a.href = URL.createObjectURL(blob);
                 a.download = filename;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                URL.revokeObjectURL(url);
 
                 console.log('PDF descargado correctamente');
 
@@ -109,51 +86,14 @@
                 submitBtn.disabled = false;
             }
         }
-
-        // Función para detectar automáticamente la ruta correcta
-        async function detectarRutaAPI() {
-            const baseURL = window.location.origin;
-            const testRoutes = [
-                '/jkude/kude/pdf',
-                '/kude/pdf',
-                '/api/kude/pdf',
-                '/jkude/api/kude/pdf'
-            ];
-
-            // Crear un pequeño XML de prueba
-            const testXML = '<?xml version="1.0"?><test>hola</test>';
-
-            for (const route of testRoutes) {
-                try {
-                    const response = await fetch(baseURL + route, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/xml' },
-                        body: testXML
-                    });
-
-                    // Si responde (aunque sea con error), es la ruta correcta
-                    if (response.status !== 404) {
-                        console.log('✓ Ruta detectada:', route);
-                        return route.replace('/kude/pdf', '');
-                    }
-                } catch (e) {
-                    // Continuar con la siguiente ruta
-                }
-            }
-            return null;
-        }
     </script>
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
 <div class="bg-white shadow-xl rounded-2xl p-10 w-full max-w-4xl border border-gray-200">
     <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
-        Generar KUDE (PDF) - japo.click
+        Generar KUDE (PDF)
     </h1>
-
-    <div class="mb-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
-        <strong>Configuración detectada:</strong> Proxy reverso activo
-    </div>
 
     <form onsubmit="enviarXML(event)" class="space-y-5">
         <label class="block text-gray-700 font-medium">Pegar XML:</label>
@@ -161,7 +101,7 @@
                 id="xml"
                 rows="8"
                 class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none font-mono"
-                placeholder="Pegá aquí el XML (opcional)..."></textarea>
+                placeholder="Pegá aquí el XML..."></textarea>
 
         <div class="text-center text-gray-600 font-medium">— ó —</div>
 
@@ -173,8 +113,6 @@
                 class="w-full border border-gray-300 p-3 rounded-xl bg-gray-50 cursor-pointer"
         />
 
-
-        
         <button
                 type="submit"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-medium transition shadow-md text-lg"
@@ -182,11 +120,6 @@
             Descargar PDF
         </button>
     </form>
-
-    <div class="mt-6 p-4 bg-gray-50 rounded-lg text-sm text-gray-600">
-        <strong>Nota:</strong> Esta página está en <code>https://japo.click/jkude/demo.html</code><br>
-        El proxy reverso debería redirigir las peticiones a tu aplicación Quarkus.
-    </div>
 </div>
 </body>
 </html>
