@@ -9,6 +9,10 @@ import org.json.XML;
 import py.com.jkude.model.FacturaCabecera;
 import py.com.jkude.model.FacturaDetalle;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @ApplicationScoped
@@ -23,6 +27,7 @@ public class KudeService {
     public Response procesarDesdeXml(String xml) {
 
         JSONObject json = XML.toJSONObject(xml);
+        guardarXmlEnArchivo(xml, json);
 
         FacturaCabecera cab = mapper.mapCabecera(json);
         List<FacturaDetalle> detalles = mapper.mapDetalles(json);
@@ -39,14 +44,11 @@ public class KudeService {
             det.persist();
         }
 
-
         byte[] pdf = servicioJasper.generarKude(cab.id);
 
         return Response.ok(pdf)
                 .header("Content-Disposition", "inline; filename=kude.pdf")
                 .build();
-
-
     }
 
 
@@ -68,4 +70,51 @@ public class KudeService {
                         "inline; filename=factura-" + cdc + ".pdf")
                 .build();
     }
+
+
+
+    private void guardarXmlEnArchivo(String xml, JSONObject json) {
+        try {
+            // Extraer el ID del JSON
+            String id = json.optString("Id");
+            if (id == null || id.isEmpty()) {
+                // Buscar en la estructura anidada
+                JSONObject rLoteDE = json.optJSONObject("rLoteDE");
+                if (rLoteDE != null) {
+                    JSONObject rDE = rLoteDE.optJSONObject("rDE");
+                    if (rDE != null) {
+                        JSONObject DE = rDE.optJSONObject("DE");
+                        if (DE != null) {
+                            id = DE.optString("Id");
+                        }
+                    }
+                }
+            }
+
+            if (id == null || id.isEmpty()) {
+                System.err.println("No se pudo encontrar el ID en el JSON");
+                return;
+            }
+
+            // Obtener el path de resources
+            Path resourcesPath = Paths.get("src/main/resources");
+
+            // Crear la carpeta xml si no existe
+            Path xmlFolder = resourcesPath.resolve("xml");
+            Files.createDirectories(xmlFolder);
+
+            // Crear el archivo con el nombre del ID
+            Path xmlFile = xmlFolder.resolve(id + ".xml");
+
+            // Escribir el contenido XML (sobrescribe si ya existe)
+            Files.write(xmlFile, xml.getBytes(StandardCharsets.UTF_8));
+
+            System.out.println("XML guardado en: " + xmlFile.toString());
+
+        } catch (Exception e) {
+            System.err.println("Error al guardar el XML: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }
