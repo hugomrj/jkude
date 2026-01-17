@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KudeTicket" pageWidth="226" pageHeight="2000" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="b3174601-2431-4921-906c-a2cbdfeb32bc">
+	<parameter name="cdc" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["01800140664049001005128912025081617262700806"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+    c.id,
+    c.ruc_emisor as emisor_ruc,
+    c.dv_emisor,   
+    c.nombre_emisor,
+    c.fantasia_emisor,
+    c.direccion_emisor,
+    c.departamento_emisor,
+    c.ciudad_emisor,
+    c.telefono_emisor,
+    c.email_emisor,
+    c.numero_timbrado,
+    c.establecimiento,
+    c.punto_expedicion,
+    c.numero_documento,
+    c.fecha_inicio_vigencia,
+    c.fecha_emision,
+    c.condicion_operacion,
+    c.moneda,
+    c.ruc_receptor,
+    c.dv_receptor,
+    c.nombre_receptor,
+    c.email_receptor,
+    c.total_iva,
+    c.total_monto,
+    c.total_gravada10,
+    c.total_exenta,
+    c.total_gravada5,
+    c.sub_exenta5,        
+    c.sub_exenta10,       
+    c.total_operacion,    
+    c.total_descuento,    
+    c.total_desc_glotem,  
+    c.total_anticipo_item,
+    c.total_anticipo,     
+    c.porc_desc_total,    
+    c.desc_total,         
+    c.anticipo,           
+    c.redondeo,           
+    c.iva5,               
+    c.iva10,              
+    c.total_base_iva,     
+    
+    -- Campos de factura_detalle (actualizados)
+    d.factura_id,
+    d.producto_codigo,
+    d.producto_descripcion,
+    d.unidad_medida,
+    d.cantidad,
+    d.precio_unitario,
+    d.exenta,
+    d.gravada5,
+    d.gravada10,
+    d.subtotal,
+    d.iva,
+
+    d.descuento_item,
+    d.porcentaje_descuento,
+    d.descuento_global_item,
+    d.total_bruto_item,
+    d.base_gravada_iva,
+    d.liquidacion_iva_item,
+    d.base_exenta,
+    d.tasa_iva,
+    d.afectacion_iva,
+    d.desc_afectacion_iva,
+    d.proporcion_iva
+
+FROM factura_cabecera c
+INNER JOIN factura_detalle d
+    ON d.factura_id = c.id
+WHERE c.id = $P{cdc}]]>
+	</queryString>
+	<field name="nombre_emisor" class="java.lang.String"/>
+	<field name="ruc_emisor" class="java.lang.String"/>
+	<field name="direccion_emisor" class="java.lang.String"/>
+	<field name="telefono_emisor" class="java.lang.String"/>
+	<field name="numero_documento" class="java.lang.String"/>
+	<field name="fecha_emision" class="java.lang.String"/>
+	<field name="producto_descripcion" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.String"/>
+	<field name="total_monto" class="java.lang.String"/>
+	<title>
+		<band height="90">
+			<textField>
+				<reportElement x="0" y="0" width="226" height="14" uuid="dde2cf6b-97dc-49d5-84b7-aded9ed9a120"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_emisor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="15" width="226" height="12" uuid="fd743d1e-3c08-4f59-b66f-f04aa2b457ad"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RUC: " + $F{ruc_emisor}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="28" width="226" height="12" uuid="325ead9c-f467-48ac-9e63-a457a0be58a1"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion_emisor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="42" width="226" height="12" uuid="4ce5dbb5-6d5a-4ceb-a188-f3be1f6bd491"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel: " + $F{telefono_emisor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="56" width="226" height="12" uuid="98fd7b0d-c7e8-4cd2-8260-40fa3fd3e297"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Doc: " + $F{numero_documento} + " - " + $F{fecha_emision}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="28">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="0" width="226" height="12" uuid="1d1a47d0-1adb-4eea-aefe-a964f741378a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad} + " x " + $F{producto_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="226" height="12" uuid="4e3adb16-4326-4985-ae22-b0c1f2e1fe70"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="0" width="226" height="15" uuid="7284d645-6c1b-4d1b-8341-65a5bf47a444"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL: " + $F{total_monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
