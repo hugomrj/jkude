@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KudeTicket" pageWidth="226" pageHeight="2000" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="b3174601-2431-4921-906c-a2cbdfeb32bc">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="372"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="622"/>
 	<parameter name="cdc" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["01800140664049001005128912025081617262700806"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="qrFilePath" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[qrFilePath]]></parameterDescription>
+		<defaultValueExpression><![CDATA["/qr/qr.png"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT
@@ -78,82 +86,633 @@ INNER JOIN factura_detalle d
     ON d.factura_id = c.id
 WHERE c.id = $P{cdc}]]>
 	</queryString>
-	<field name="nombre_emisor" class="java.lang.String"/>
-	<field name="ruc_emisor" class="java.lang.String"/>
-	<field name="direccion_emisor" class="java.lang.String"/>
-	<field name="telefono_emisor" class="java.lang.String"/>
-	<field name="numero_documento" class="java.lang.String"/>
-	<field name="fecha_emision" class="java.lang.String"/>
-	<field name="producto_descripcion" class="java.lang.String"/>
-	<field name="cantidad" class="java.lang.String"/>
-	<field name="subtotal" class="java.lang.String"/>
-	<field name="total_monto" class="java.lang.String"/>
+	<field name="id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="emisor_ruc" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="emisor_ruc"/>
+		<property name="com.jaspersoft.studio.field.label" value="emisor_ruc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="dv_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="dv_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="dv_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="nombre_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="fantasia_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="fantasia_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="fantasia_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="direccion_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="direccion_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="departamento_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="departamento_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="departamento_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="ciudad_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="ciudad_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="ciudad_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="telefono_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="telefono_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="email_emisor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="email_emisor"/>
+		<property name="com.jaspersoft.studio.field.label" value="email_emisor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="numero_timbrado" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="numero_timbrado"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_timbrado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="establecimiento" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="establecimiento"/>
+		<property name="com.jaspersoft.studio.field.label" value="establecimiento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="punto_expedicion" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="punto_expedicion"/>
+		<property name="com.jaspersoft.studio.field.label" value="punto_expedicion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="numero_documento" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="numero_documento"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero_documento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="fecha_inicio_vigencia" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_inicio_vigencia"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_inicio_vigencia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="fecha_emision" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_emision"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_emision"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="condicion_operacion" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="condicion_operacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="condicion_operacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="moneda" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="moneda"/>
+		<property name="com.jaspersoft.studio.field.label" value="moneda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="ruc_receptor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="ruc_receptor"/>
+		<property name="com.jaspersoft.studio.field.label" value="ruc_receptor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="dv_receptor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="dv_receptor"/>
+		<property name="com.jaspersoft.studio.field.label" value="dv_receptor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="nombre_receptor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_receptor"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_receptor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="email_receptor" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="email_receptor"/>
+		<property name="com.jaspersoft.studio.field.label" value="email_receptor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_iva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_monto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_monto"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_monto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_gravada10" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_gravada10"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_gravada10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_exenta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_exenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_exenta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_gravada5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_gravada5"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_gravada5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="sub_exenta5" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="sub_exenta5"/>
+		<property name="com.jaspersoft.studio.field.label" value="sub_exenta5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="sub_exenta10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sub_exenta10"/>
+		<property name="com.jaspersoft.studio.field.label" value="sub_exenta10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_operacion" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_operacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_operacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_descuento" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_descuento"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_descuento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_desc_glotem" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_desc_glotem"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_desc_glotem"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_anticipo_item" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_anticipo_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_anticipo_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_anticipo" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_anticipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_anticipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="porc_desc_total" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="porc_desc_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="porc_desc_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="desc_total" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="desc_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="anticipo" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="anticipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="anticipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="redondeo" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="redondeo"/>
+		<property name="com.jaspersoft.studio.field.label" value="redondeo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="iva5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iva5"/>
+		<property name="com.jaspersoft.studio.field.label" value="iva5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="iva10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="iva10"/>
+		<property name="com.jaspersoft.studio.field.label" value="iva10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="total_base_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_base_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_base_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_cabecera"/>
+	</field>
+	<field name="factura_id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="factura_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="factura_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="producto_codigo" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="producto_codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="producto_codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="producto_descripcion" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="producto_descripcion"/>
+		<property name="com.jaspersoft.studio.field.label" value="producto_descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="unidad_medida" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="unidad_medida"/>
+		<property name="com.jaspersoft.studio.field.label" value="unidad_medida"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="cantidad" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="precio_unitario" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="precio_unitario"/>
+		<property name="com.jaspersoft.studio.field.label" value="precio_unitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="exenta" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="exenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="exenta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="gravada5" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="gravada5"/>
+		<property name="com.jaspersoft.studio.field.label" value="gravada5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="gravada10" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="gravada10"/>
+		<property name="com.jaspersoft.studio.field.label" value="gravada10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="subtotal" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="subtotal"/>
+		<property name="com.jaspersoft.studio.field.label" value="subtotal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="descuento_item" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="descuento_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="descuento_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="porcentaje_descuento" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="porcentaje_descuento"/>
+		<property name="com.jaspersoft.studio.field.label" value="porcentaje_descuento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="descuento_global_item" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="descuento_global_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="descuento_global_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="total_bruto_item" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_bruto_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_bruto_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="base_gravada_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="base_gravada_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="base_gravada_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="liquidacion_iva_item" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="liquidacion_iva_item"/>
+		<property name="com.jaspersoft.studio.field.label" value="liquidacion_iva_item"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="base_exenta" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="base_exenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="base_exenta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="tasa_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="tasa_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="tasa_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="afectacion_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="desc_afectacion_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="desc_afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="desc_afectacion_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
+	<field name="proporcion_iva" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="proporcion_iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="proporcion_iva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="factura_detalle"/>
+	</field>
 	<title>
-		<band height="90">
+		<band height="227">
 			<textField>
-				<reportElement x="0" y="0" width="226" height="14" uuid="dde2cf6b-97dc-49d5-84b7-aded9ed9a120"/>
+				<reportElement x="5" y="23" width="214" height="14" uuid="dde2cf6b-97dc-49d5-84b7-aded9ed9a120"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_emisor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="15" width="226" height="12" uuid="fd743d1e-3c08-4f59-b66f-f04aa2b457ad"/>
+				<reportElement x="5" y="38" width="214" height="12" uuid="fd743d1e-3c08-4f59-b66f-f04aa2b457ad"/>
 				<textElement textAlignment="Center">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["RUC: " + $F{ruc_emisor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["RUC: "  + $F{emisor_ruc}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="0" y="28" width="226" height="12" uuid="325ead9c-f467-48ac-9e63-a457a0be58a1"/>
+				<reportElement x="5" y="51" width="214" height="12" uuid="325ead9c-f467-48ac-9e63-a457a0be58a1"/>
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccion_emisor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="42" width="226" height="12" uuid="4ce5dbb5-6d5a-4ceb-a188-f3be1f6bd491"/>
+				<reportElement x="5" y="65" width="214" height="12" uuid="4ce5dbb5-6d5a-4ceb-a188-f3be1f6bd491"/>
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Tel: " + $F{telefono_emisor}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="0" y="56" width="226" height="12" uuid="98fd7b0d-c7e8-4cd2-8260-40fa3fd3e297"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="5" y="5" width="216" height="12" uuid="f5854780-0aa0-4b57-a468-788f263e6f13"/>
+				<textElement textAlignment="Center">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["KuDE de Factura Electrónica"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="5" y="79" width="214" height="12" uuid="21315aee-06a2-4361-a3a2-4284d7c14e0b"/>
 				<textElement textAlignment="Center">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Doc: " + $F{numero_documento} + " - " + $F{fecha_emision}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ciudad_emisor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="94" width="225" height="1" uuid="70dd9443-825f-490b-a7ea-44467a6af880"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="5" y="100" width="214" height="12" uuid="10e2ce9c-d0e8-4ae0-8d7e-544a8356fa14"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Timbrado Nro: " + $F{numero_timbrado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="113" width="214" height="12" uuid="89f13457-331e-4a21-bd04-b2fb37b3231c"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vigente desde : " + $F{fecha_inicio_vigencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="126" width="214" height="12" uuid="7e3aa502-05bb-4d36-b12f-fc5c7d00051c"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Factura Electrónica : " + $F{establecimiento}+"-"+$F{punto_expedicion}+"-"+$F{numero_documento}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="142" width="225" height="1" uuid="1ba6d7ab-bf22-43bd-acbb-29cf9502eb99"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="5" y="150" width="214" height="12" uuid="953d632c-6dc3-4c31-b1ab-d07688b65dfc"/>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision} == null
+    ? ""
+    : "Fecha: " + java.time.LocalDateTime.parse($F{fecha_emision})
+        .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="163" width="214" height="12" uuid="a68b0559-3cac-40fd-8f15-9b787e6acd24"/>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente :"+ $F{nombre_receptor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="176" width="214" height="12" uuid="25f68059-8d81-4c37-a7d1-867f362e5d42"/>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ruc / CI :"+ $F{ruc_receptor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="189" width="214" height="12" uuid="72996bb8-0de1-4d99-b9a3-fb0c7de4b839"/>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Condicion :"+ $F{condicion_operacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="210" width="154" height="12" uuid="885f9490-fc06-43e3-a20e-b7711d314023"/>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Producto / Cqantidad / Precio"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="210" width="58" height="12" uuid="e55211f3-e01e-441b-8aa3-9804646d5b2b"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="28">
+		<band height="29">
 			<textField textAdjust="StretchHeight">
-				<reportElement x="0" y="0" width="226" height="12" uuid="1d1a47d0-1adb-4eea-aefe-a964f741378a"/>
+				<reportElement x="6" y="2" width="212" height="12" uuid="1d1a47d0-1adb-4eea-aefe-a964f741378a"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cantidad} + " x " + $F{producto_descripcion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{producto_descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="14" width="226" height="12" uuid="4e3adb16-4326-4985-ae22-b0c1f2e1fe70"/>
+				<reportElement x="150" y="14" width="68" height="12" uuid="4e3adb16-4326-4985-ae22-b0c1f2e1fe70"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format(
+    (
+        ($F{exenta} == null ? 0 : Double.parseDouble($F{exenta}.toString()))
+      + ($F{gravada5} == null ? 0 : Double.parseDouble($F{gravada5}.toString()))
+      + ($F{gravada10} == null ? 0 : Double.parseDouble($F{gravada10}.toString()))
+    )
+)]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="6" y="14" width="144" height="12" uuid="f78ea942-4047-43af-a9ea-efe7ccaf8cd2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cantidad} == null
+    ? ""
+    : ((Number)$F{cantidad}).intValue() + " " + $F{unidad_medida}
+)
++ " x "
++ (
+    $F{precio_unitario} == null
+        ? "0"
+        : new java.text.DecimalFormat("#,##0")
+            .format(new java.math.BigDecimal($F{precio_unitario}.toString()))
+)
++ (
+    $F{tasa_iva} == null
+        ? ""
+        : " (IVA " + ((Number)$F{tasa_iva}).intValue() + "%)"
+)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="30">
+		<band height="390">
+			<line>
+				<reportElement x="0" y="3" width="225" height="1" uuid="55822b0e-6656-4689-9d8f-ec41d4390172"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
 			<textField>
-				<reportElement x="0" y="0" width="226" height="15" uuid="7284d645-6c1b-4d1b-8341-65a5bf47a444"/>
-				<textElement textAlignment="Right">
-					<font size="9" isBold="true"/>
+				<reportElement x="5" y="10" width="114" height="12" uuid="b92a7ab7-ff09-4ce3-bb1f-76be817dae08"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["TOTAL: " + $F{total_monto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Total a pagar :"]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="128" y="10" width="90" height="12" uuid="a3ecd040-5198-421f-a479-1d5670a6f8af"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_monto} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(
+        new java.math.BigDecimal($F{total_monto}).setScale(0, java.math.RoundingMode.HALF_UP)
+      )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="30" width="225" height="1" uuid="90153c1e-dd96-418e-80e9-c775627335fc"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="5" y="40" width="212" height="12" uuid="53754a15-a1de-4b9d-bdbc-44f4ff153b8b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total IVA: " + (
+    $F{total_iva} == null
+        ? ""
+        : new java.text.DecimalFormat("#,##0")
+              .format(new java.math.BigDecimal($F{total_iva}))
+)]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="4" y="54" width="96" height="12" uuid="e7a6aa73-a49f-4b67-9f4a-1023fc4aea17"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["IVA 10%: " + (
+$F{iva10} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{iva10}))
+)]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="100" y="54" width="96" height="12" uuid="93478bb1-3b3e-497b-94fa-83c2c8a619b2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Base 10%: " + (
+$F{sub_exenta10} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal(  $F{sub_exenta10}    ))
+)]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="4" y="68" width="96" height="12" uuid="96b39873-cf3b-4727-8a04-bb85ee23f474"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["IVA 5%: " + (
+$F{iva5} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{iva5}))
+)]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="100" y="68" width="96" height="12" uuid="85bfe403-9ecf-4402-95a2-3d7b90038c3e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Base 5%: " + new java.text.DecimalFormat("#,##0")
+    .format(
+        new java.math.BigDecimal(
+            $F{total_gravada5} == null ? "0" : $F{total_gravada5}
+        )
+    )]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="4" y="83" width="96" height="12" uuid="e8ec2949-6cab-4147-8e32-8c4f5d15ad50"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Exenta: " + (
+$F{total_exenta} == null 
+    ? "" 
+    : new java.text.DecimalFormat("#,##0").format(new java.math.BigDecimal($F{total_exenta}))
+)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="113" width="200" height="26" uuid="8517031b-5e4d-4119-95e6-2e892b2a6d0d"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Consulte la validez de esta Factura electrónica con el número de
+CDC impreso abajo en:
+https://ekuatia.set.gov.py/consultas]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="10" y="143" width="200" height="12" uuid="9cb56fbf-1c1f-4e07-a2a7-da9f51512eb9"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="36" y="160" width="148" height="150" uuid="53fbc263-fd8a-4cee-801c-79ae71c63701">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[new Boolean(true)]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{qrFilePath}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="320" width="200" height="20" uuid="08caff38-3137-4383-ae4e-212dba5ce28a"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[REPRESENTACIÓN GRÁFICA SIFEN
+DOCUMENTO ELECTRÓNICO (XML)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="340" width="200" height="40" uuid="79364fe8-c540-4c51-95e7-193dbc1a2634"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ESTE DOCUMENTO ES UNA REPRESENTACION GRAFICA DE
+Si su documento electrónico presenta algún error puede solicitar la
+modificación dentro de las 72 horas siguientes de la emisión de
+este comprobante]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

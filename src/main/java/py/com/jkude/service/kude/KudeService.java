@@ -9,6 +9,7 @@ import py.com.jkude.model.FacturaCabecera;
 import py.com.jkude.model.FacturaDetalle;
 import py.com.jkude.service.reporte.ReporteService;
 import py.com.jkude.service.xml.XmlFileService;
+import py.com.jkude.util.TipoPdf;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class KudeService {
     ReporteService reporteService;
 
     @Inject
-    XmlFileService xmlFileService; // ✅ Inyectado
+    XmlFileService xmlFileService;
 
-    public Response procesarDesdeXml(String xml) {
+    public Response procesarDesdeXml(String xml, TipoPdf tipo) {
         JSONObject json = XML.toJSONObject(xml);
 
         xmlFileService.guardarXmlEnArchivo(xml, json);
@@ -44,7 +45,7 @@ public class KudeService {
             det.persist();
         }
 
-        byte[] pdf = reporteService.generarKude(cab.id);
+        byte[] pdf = reporteService.generarKude(tipo, cab.id);
 
         return Response.ok(pdf)
                 .header("Content-Disposition", "inline; filename=kude.pdf")

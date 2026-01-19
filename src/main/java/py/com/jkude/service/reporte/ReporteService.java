@@ -5,6 +5,7 @@ import net.sf.jasperreports.engine.*;
 import javax.sql.DataSource;
 import jakarta.inject.Inject;
 import py.com.jkude.util.QRCodeGenerator;
+import py.com.jkude.util.TipoPdf;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +20,7 @@ public class ReporteService {
     @Inject
     DataSource dataSource;
 
-    public byte[] generarKude(String cdc) {
+    public byte[] generarKude(TipoPdf tipo, String cdc) {
 
         try {
             Map<String, Object> params = new HashMap<>();
@@ -59,10 +60,20 @@ public class ReporteService {
 
 
             // JRXML ABSOLUTO
-            File jrxmlFile = new File(basePath + "/kude.jrxml");
+            //File jrxmlFile = new File(basePath + "/kude.jrxml");
+
+            String jrxmlName = switch (tipo) {
+                case KUDE -> "kude.jrxml";
+                case TICKET -> "ticket.jrxml";
+            };
+            File jrxmlFile = new File(basePath + "/" + jrxmlName);
+
             if (!jrxmlFile.exists()) {
-                throw new RuntimeException("No se encontró kude.jrxml en: " + jrxmlFile.getAbsolutePath());
+                throw new RuntimeException(
+                        "No se encontró " + jrxmlName + " en: " + jrxmlFile.getAbsolutePath()
+                );
             }
+
             InputStream jrxml = new FileInputStream(jrxmlFile);
 
             // Obtener conexión real de Quarkus + SQLite

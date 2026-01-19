@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import py.com.jkude.service.kude.KudeService;
+import py.com.jkude.util.TipoPdf;
 
 @Path("/kude")
 @Transactional
@@ -20,7 +21,7 @@ public class KudeResource {
     @Consumes(MediaType.APPLICATION_XML)
     @Produces("application/pdf")
     public Response procesarFactura(String xml) {
-        return kudeService.procesarDesdeXml(xml);
+        return kudeService.procesarDesdeXml(xml,  TipoPdf.KUDE);
     }
 
 
@@ -30,4 +31,17 @@ public class KudeResource {
     public Response generarPorCdc(@PathParam("cdc") String cdc) {
         return kudeService.generarPorCdc(cdc);
     }
+
+
+    @POST
+    @Path("/ticket")
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces("application/pdf")
+    public Response procesarTicket(String xml) {
+        return kudeService.procesarDesdeXml(xml, TipoPdf.TICKET);
+    }
+
+
+
+
 }
