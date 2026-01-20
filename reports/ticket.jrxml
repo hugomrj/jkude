@@ -507,14 +507,14 @@ WHERE c.id = $P{cdc}]]>
 				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Condicion :"+ $F{condicion_operacion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Condición :"+ $F{condicion_operacion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="6" y="210" width="154" height="12" uuid="885f9490-fc06-43e3-a20e-b7711d314023"/>
 				<textElement textAlignment="Left">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Producto / Cqantidad / Precio"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Producto / Cantidad / Precio"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="160" y="210" width="58" height="12" uuid="e55211f3-e01e-441b-8aa3-9804646d5b2b"/>
