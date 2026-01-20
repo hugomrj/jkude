@@ -21,7 +21,7 @@ public class KudeResource {
     @Consumes(MediaType.APPLICATION_XML)
     @Produces("application/pdf")
     public Response procesarFactura(String xml) {
-        return kudeService.procesarDesdeXml(xml,  TipoPdf.KUDE);
+            return kudeService.procesarDesdeXml(xml,  TipoPdf.KUDE);
     }
 
 

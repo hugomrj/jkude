@@ -60,12 +60,7 @@ public class ReporteService {
 
 
             // JRXML ABSOLUTO
-            //File jrxmlFile = new File(basePath + "/kude.jrxml");
-
-            String jrxmlName = switch (tipo) {
-                case KUDE -> "kude.jrxml";
-                case TICKET -> "ticket.jrxml";
-            };
+            String jrxmlName = tipo.jrxml();
             File jrxmlFile = new File(basePath + "/" + jrxmlName);
 
             if (!jrxmlFile.exists()) {

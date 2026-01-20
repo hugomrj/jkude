@@ -61,7 +61,7 @@ public class KudeService {
                     .build();
         }
 
-        byte[] pdf = reporteService.generarKude(cdc);
+        byte[] pdf = reporteService.generarKude(TipoPdf.KUDE, cdc);
 
         return Response.ok(pdf)
                 .header("Content-Disposition",
